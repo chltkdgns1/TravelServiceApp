@@ -1,0 +1,21 @@
+구글 맵 둥글게 하기
+https://stackoverrun.com/ko/q/3913928
+
+마커에 대해서
+https://mailmail.tistory.com/19
+
+마커 리스너
+https://mailmail.tistory.com/21
+
+구글 맵 위에 클릭 이벤트
+https://mainia.tistory.com/726
+
+구글 자체에서 제공해주는 플랫폼 api 정보
+https://github.com/googlemaps/android-samples
+
+키보드 올리기 내리기
+https://sharp57dev.tistory.com/15
+
+https://developers.google.com/maps/documentation/android-sdk/marker?hl=ko
+
+https://developers.google.com/maps/documentation/?hl=ko&_ga=2.178856804.1503944884.1586271525-743240586.1586271525&_gac=1.115925364.1586359466.CjwKCAjw7LX0BRBiEiwA__gNw0PrI9wm58H0eSCej3Yoaoi9cmWixB1KYolOT5ose7-cXfqKq8jyHhoCup0QAvD_BwE

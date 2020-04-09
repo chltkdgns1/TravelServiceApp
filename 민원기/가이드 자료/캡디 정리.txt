@@ -1,0 +1,243 @@
+4.4
+
+우선 안드로이드에서 어느정도 참고해서 만들것.
+
+UI 디자인 드래그 사용금지
+
+<LinearLayout wrap : 내가 생성한 크기만큼 유지
+	여기엔 orientation이 있어야함.
+	android: orientation = "vertical" <- 수직
+			     = "horizontal" <- 수평
+
+
+운영체제
+	프로세스1
+		쓰레드1
+		쓰레드2
+	프로세스2
+		쓰레드1
+		쓰레드2
+
+
+프로세스 - 컴퓨터에서 연속적으로 실행되고 있는 프로그램
+
+쓰레드 - 프로세스 내에서 실행되는 흐름의 단위
+
+파씽 - 어떤 페이지에서 내가 원하는 데이터를 특정 패턴/순서로 추출해 가공하는것.
+
+무엇을 했는지는 sorcecode에 올릴것.
+
+
+아직 안드로이드에 익숙해지지 못했으니 우선 안드로이드에 익숙해지자,
+그 이후에 API정보를 어떻게 파싱해야하며 어떻게 만들어야할지를 공부해야할것같다.
+
+4.5
+
+안드로이드로 xml를 다루는법까지는 굉장히 쉬웠다.
+그냥 디자인만 하면 되는것이기 때문이다.
+하지만, 그 안의 기능을 어떻게 구현해야할지 모르겠다.
+아직 감이 안잡히지만 차근차근 배워나가자
+
+
+4.6
+
+인증키
+cJzPoEsdtUT5g2kVGWs65MmgIJZdGbeRKMd6yI9JJx%2F2lbbgZuxwJl5cpwos0MdE68yuXc%2F643AQ9oIGFxNA1A%3D%3D
+
+오늘 api적용하고 실제로 쓰는 실습을 해본결과 많은 개념들이 요구된다는것을 절실하게 느꼈다.
+마냥 쉽게 쉽게 하려고하는 생각을 버려야겠다고 마음을 다잡았고 정말 아예 싹다 다시 시작해야겠다고 느꼈다.
+실제로 안드로이드 프로그래밍과 자바언어에 익숙하지 않아서 코드들이 눈에 안들어온것도 있었고
+아무런 개념이 잡히지 않은채 쓰레드의 개념과 xml 및 json코드 깃허브 등등 익숙하지 못한것은
+나의 노력부족이 매우 클 것이다. 어쨌든간 진짜 죽을때까지 기를 쓰고 해야겠다는 생각이 든다.
+적어도 팀원에게 피해는 끼치면 안되니까.... 그리고 진짜 이번 기회에 멋있는 어플리케이션을 만들고 싶다는 생각이 든다.
+
+
+###########################################################################################
+
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:weightSum="1"
+    tools:context=".MainActivity">
+
+    <Button
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="여행지 추천 어플리케이션"
+        />
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="16dp"
+        >
+        <com.google.android.material.textfield.TextInputEditText
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="80dp"
+            android:hint="여행지를 입력해주세요"
+            android:layout_marginRight="80dp"
+            android:id="@+id/TextInputEdit_Signup_id"
+            />
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="150dp"
+        android:orientation="horizontal"
+        >
+
+        <TextView
+            android:layout_marginLeft="70dp"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:gravity="center"
+            android:text="여행지를 입력한 뒤 아래의 버튼을 눌러주세요"/>
+    </LinearLayout>
+
+    <Button
+        android:id="@+id/Button_first"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="150dp"
+        android:layout_marginTop="50dp"
+        android:text="Button" />
+</LinearLayout>
+
+###########################################################################################
+
+#############################참고용소스####################################################
+
+###########################################################################################
+
+도시정보 api
+
+import java.io.InputStreamReader;
+import java.net.HttpURLConnection;
+import java.net.URL;
+import java.net.URLEncoder;
+import java.io.BufferedReader;
+import java.io.IOException;
+
+public class ApiExplorer {
+    public static void main(String[] args) throws IOException {
+        StringBuilder urlBuilder = new StringBuilder("http://openapi.tago.go.kr/openapi/service/BusRouteInfoInqireService/getCtyCodeList"); /*URL*/
+        urlBuilder.append("?" + URLEncoder.encode("ServiceKey","UTF-8") + "=서비스키"); /*Service Key*/
+        urlBuilder.append("&" + URLEncoder.encode("파라미터영문명","UTF-8") + "=" + URLEncoder.encode("파라미터기본값", "UTF-8")); /*파라미터설명*/
+        URL url = new URL(urlBuilder.toString());
+        HttpURLConnection conn = (HttpURLConnection) url.openConnection();
+        conn.setRequestMethod("GET");
+        conn.setRequestProperty("Content-type", "application/json");
+        System.out.println("Response code: " + conn.getResponseCode());
+        BufferedReader rd;
+        if(conn.getResponseCode() >= 200 && conn.getResponseCode() <= 300) {
+            rd = new BufferedReader(new InputStreamReader(conn.getInputStream()));
+        } else {
+            rd = new BufferedReader(new InputStreamReader(conn.getErrorStream()));
+        }
+        StringBuilder sb = new StringBuilder();
+        String line;
+        while ((line = rd.readLine()) != null) {
+            sb.append(line);
+        }
+        rd.close();
+        conn.disconnect();
+        System.out.println(sb.toString());
+    }
+}
+
+
+
+###########################################################################################
+
+
+
+xml
+
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    >
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+    <TextView
+        android:id="@+id/result"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        />
+    </ScrollView>
+</LinearLayout>
+
+
+###########################################################################################
+
+
+java
+
+ackage com.example.myapplicationaaaa;
+
+import androidx.appcompat.app.AppCompatActivity;
+
+import android.os.Bundle;
+
+import java.io.BufferedReader;
+import java.io.InputStreamReader;
+import java.net.HttpURLConnection;
+import java.net.URL;
+import java.net.URLEncoder;
+
+public class MainActivity extends AppCompatActivity {
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_main);
+        new Thread(new Runnable() {
+            @Override
+            public void run() {
+                // TODO Auto-generated method stub
+                try{
+                    StringBuilder urlBuilder = new StringBuilder("http://openapi.tago.go.kr/openapi/service/BusRouteInfoInqireService/getCtyCodeList"); /*URL*/
+                    urlBuilder.append("?" + URLEncoder.encode("ServiceKey","UTF-8") + "=cJzPoEsdtUT5g2kVGWs65MmgIJZdGbeRKMd6yI9JJx%2F2lbbgZuxwJl5cpwos0MdE68yuXc%2F643AQ9oIGFxNA1A%3D%3D"); /*Service Key*/
+                    urlBuilder.append("&" + URLEncoder.encode("파라미터영문명","UTF-8") + "=" + URLEncoder.encode("파라미터기본값", "UTF-8")); /*파라미터설명*/
+                    URL url = new URL(urlBuilder.toString());
+                    HttpURLConnection conn = (HttpURLConnection) url.openConnection();
+                    conn.setRequestMethod("GET");
+                    conn.setRequestProperty("Content-type", "application/json");
+                    System.out.println("Response code: " + conn.getResponseCode());
+                    BufferedReader rd;
+                    if(conn.getResponseCode() >= 200 && conn.getResponseCode() <= 300) {
+                        rd = new BufferedReader(new InputStreamReader(conn.getInputStream()));
+                    } else {
+                        rd = new BufferedReader(new InputStreamReader(conn.getErrorStream()));
+                    }
+                    StringBuilder sb = new StringBuilder();
+                    String line;
+                    while ((line = rd.readLine()) != null) {
+                        sb.append(line);
+                    }
+                    rd.close();
+                    conn.disconnect();
+                    System.out.println(sb.toString());
+                }
+                catch(Exception e){
+
+                }
+            }
+        }).start();
+    }
+}
+
+
+###########################################################################################
+
+

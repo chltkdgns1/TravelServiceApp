@@ -1,0 +1,40 @@
+버스 api
+https://www.data.go.kr/dataset/15000170/openapi.do
+
+국가 데이터 api 를 소개함 참고하면 될 듯
+https://www.data.go.kr/
+
+https://www.apistore.co.kr/api/apiView.do?service_seq=140
+
+시외버스
+https://www.data.go.kr/dataset/15000590/openapi.do
+
+고속버스
+https://www.data.go.kr/dataset/15000501/openapi.do
+
+서울지하철
+https://www.data.go.kr/dataset/15015807/openapi.do
+
+대전지하철
+https://www.data.go.kr/dataset/15000960/openapi.do
+
+전국지하철
+https://www.data.go.kr/dataset/15000754/openapi.do
+
+
+네이버 맵스 홈페이지
+사용하려면 요금을 내야함
+https://www.ncloud.com/mypage/billing
+
+카카오 지도
+사용할거면 카카오지도나
+https://developers.kakao.com/product/map
+
+구글에서  제공해주는 것도 나쁘지 않음
+구글은 단점이 한국에서 제공하는 데이터를 갖지 못한 것도 잇음 
+https://cloud.google.com/maps-platform?hl=ko
+
+안드로이드 파서에 연관한 사이트
+ https://recipes4dev.tistory.com/134
+
+

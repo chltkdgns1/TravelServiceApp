@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<response>
+	<header>
+		<resultCode>00</resultCode>
+		<resultMsg>NORMALSERVICE.</resultMsg>
+	</header>
+	<body>
+		<items>
+			<item>
+				<endnodenm>목련아파트</endnodenm>
+				<endvehicletime>2235</endvehicletime>
+				<intervalsattime>25</intervalsattime>
+				<intervalsuntime>40</intervalsuntime>
+				<intervaltime>25</intervaltime>
+				<routeid>DJB30300004</routeid>
+				<routeno>5</routeno>
+				<routetp>마을버스</routetp>
+				<startnodenm>마을,봉산동</startnodenm>
+				<startvehicletime>0600</startvehicletime>
+			</item>
+		</items>
+	</body>
+</response>
