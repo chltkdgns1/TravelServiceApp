@@ -12,3 +12,11 @@
 git add ./Choi 
 
 이런 방식으로 깃에 업로드 하면 됩니다 쉽죠잉?
+
+![3](https://user-images.githubusercontent.com/49302859/79190786-17d4be80-7e60-11ea-86fc-05de5ae655d1.PNG)
+
+그래서 실제로 위의 방식대로 해봣습니다.
+
+![4](https://user-images.githubusercontent.com/49302859/79190790-1905eb80-7e60-11ea-83a0-8d5858075c3e.PNG)
+
+잘되네요 ㅎ? 새텍스트가 새로 푸쉬한 건데 잘들어갑니다.
