@@ -1,3 +1,5 @@
+필독부터 
+
 ![1](https://user-images.githubusercontent.com/49302859/79190319-f9ba8e80-7e5e-11ea-9de2-455932612426.PNG)
 
 위의 방법은 ./ <- 메인폴더 그니까 제 폴더 기준으로 TravelAppdata 가 됩니다. 여기 안에 있는 s 라는 폴더를 깃에 올리겠다는 명령어입니다.
