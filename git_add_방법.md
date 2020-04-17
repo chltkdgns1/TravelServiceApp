@@ -22,3 +22,5 @@ git add ./Choi
 ![4](https://user-images.githubusercontent.com/49302859/79190790-1905eb80-7e60-11ea-83a0-8d5858075c3e.PNG)
 
 잘되네요 ㅎ? 새텍스트가 새로 푸쉬한 건데 잘들어갑니다.
+
+![2](https://user-images.githubusercontent.com/49302859/79573953-61403a80-80fa-11ea-997d-d2e110071f3d.PNG)
