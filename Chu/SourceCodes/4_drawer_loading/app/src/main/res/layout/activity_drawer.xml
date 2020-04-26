@@ -15,7 +15,8 @@
         android:layout_margin="10dp"
         android:text="메뉴닫기"/>
 
-    <TextView
+    <Button
+        android:id="@+id/btn_chuMenuFrag1"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
@@ -27,7 +28,8 @@
         android:background="#60E4D8"
         android:orientation="vertical">
 
-        <TextView
+        <Button
+            android:id="@+id/btn_TestMenuFrag2"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_gravity="center"

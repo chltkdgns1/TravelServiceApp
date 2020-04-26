@@ -6,13 +6,14 @@ custom drawer 제작
 
 ![2](https://user-images.githubusercontent.com/58544469/80198831-99e09680-865b-11ea-971f-90e075810dfb.png)
 
-### 2. 드로워 작동
+### 2. 드로워 메뉴에 프래그먼트 화면 전환
+![frag1](https://user-images.githubusercontent.com/58544469/80296176-aa0b8980-87b3-11ea-8dda-c00a5e1c3e4e.png)
 
-![1](https://user-images.githubusercontent.com/58544469/80198826-98af6980-865b-11ea-8f7e-a4114ab770dd.png)
+![fragtest1](https://user-images.githubusercontent.com/58544469/80296178-ac6de380-87b3-11ea-82bb-ee81c7c89322.png)
 
-![3](https://user-images.githubusercontent.com/58544469/80198833-9a792d00-865b-11ea-80aa-7599225d4bd4.png)
+![fragtest2](https://user-images.githubusercontent.com/58544469/80296179-ad9f1080-87b3-11ea-92a2-af75a736d948.png)
 
 
-* 추가 제작중
-* 드로워를 이용한 프래그먼트
-* 드로워의 메뉴들을 누르면 새로운 화면전환 (기능전환)
+
+
+* 드로워 메뉴의 버튼을 눌러서 프래그먼트 전환 가능 (화면 전환)
