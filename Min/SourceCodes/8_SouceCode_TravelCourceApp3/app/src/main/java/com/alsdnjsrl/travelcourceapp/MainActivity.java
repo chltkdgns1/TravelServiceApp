@@ -4,6 +4,7 @@ import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.graphics.PointF;
 import android.os.Bundle;
 
 import android.os.Handler;
@@ -23,10 +24,13 @@ import com.skt.Tmap.TMapView;
 import androidx.drawerlayout.widget.DrawerLayout;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.Toast;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -35,6 +39,7 @@ public class MainActivity extends AppCompatActivity {
     private String key = "l7xx78ce6244fbb34c96b88e96ad54e4074e";
     // key 자기 key 바꿔주면 되요 tmap api 키
 
+    private RecyclerView recyclerView;
     private TMapView tMapView; // 티맵 뷰
     private DrawerLayoutClass drawerLayoutClass; // 제 코드에서 사용하고 있지 않음
     private EditText EditText_Search; // 제 맵 검색
@@ -111,9 +116,12 @@ public class MainActivity extends AppCompatActivity {
                             destinationsClass.add(dstData);
 
                             TMapMarkerItem marker = new TMapMarkerItem();
+                            marker.setCanShowCallout(true);
+                            marker.setAutoCalloutVisible(true);
                             TMapPoint tMapPoint1 = new TMapPoint(x, y);
                             marker.setIcon(bitmap[pictureIndex]);
                             marker.setTMapPoint(tMapPoint1);
+                            marker.setCalloutTitle("나 클릭했엉?");
 
 
                             tMapView.addMarkerItem(item.getPOIAddress(), marker);
@@ -121,6 +129,7 @@ public class MainActivity extends AppCompatActivity {
                         }
                     });
                 }
+
 
                 /*
                 locationData = (List<naverSearchLocationData>) msg.obj;
@@ -241,7 +250,6 @@ public class MainActivity extends AppCompatActivity {
 
 
 
-
         naverlocation = new naverLocationSearch(); //찾아지는거 확인
 
         bitmap = new Bitmap[10];
@@ -266,8 +274,8 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 String txt = EditText_Search.getText().toString();
-               Rounded_Layout.setVisibility(View.VISIBLE);
-                CardView_Bottom.setVisibility(View.VISIBLE);
+                if(Rounded_Layout.getVisibility() != View.VISIBLE) Rounded_Layout.setVisibility(View.VISIBLE);
+                if(CardView_Bottom.getVisibility() != View.VISIBLE) CardView_Bottom.setVisibility(View.VISIBLE);
                 check_edit = false;
                 if (txt.isEmpty()) return;
 
@@ -445,6 +453,20 @@ public class MainActivity extends AppCompatActivity {
 
         linearLayoutTmap = (LinearLayout) findViewById(R.id.linearLayoutTmap);
         tMapView = new TMapView(this);
+
+        tMapView.setOnClickListenerCallBack(new TMapView.OnClickListenerCallback() {
+            @Override
+            public boolean onPressEvent(ArrayList<TMapMarkerItem> arrayList, ArrayList<TMapPOIItem> arrayList1, TMapPoint tMapPoint, PointF pointF) {
+                // 클릭했을 때
+                System.out.println("여기들어왔니? 시발아 ? ㅎㅎ ");
+                return true;
+            }
+
+            @Override
+            public boolean onPressUpEvent(ArrayList<TMapMarkerItem> arrayList, ArrayList<TMapPOIItem> arrayList1, TMapPoint tMapPoint, PointF pointF) {
+                return true;
+            }
+        });
     }
 
     private void EditTextTouch() { // 텍스트 누르면 맵이 안보임
