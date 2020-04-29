@@ -2,6 +2,7 @@ package com.alsdnjsrl.travelcourceapp;
 
 import android.app.Activity;
 import android.content.Context;
+import android.os.Handler;
 
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -34,6 +35,15 @@ public class DestinationsClass {
         */
 
         recyclerView.setAdapter(mAdapter);
+    }
+
+    void toPosition(final int index){
+        new Handler().postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                recyclerView.scrollToPosition(index); // 얘가다함
+            }
+        }, 200);
     }
 
     void add(DestinationDataClass data){

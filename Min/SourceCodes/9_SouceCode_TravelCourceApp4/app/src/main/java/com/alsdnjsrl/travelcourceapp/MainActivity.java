@@ -39,8 +39,6 @@ public class MainActivity extends AppCompatActivity {
     private String key = "l7xx78ce6244fbb34c96b88e96ad54e4074e";
     // key 자기 key 바꿔주면 되요 tmap api 키
 
-    private RecyclerView.Adapter mAdapter;
-    private RecyclerView recyclerView;
     private TMapView tMapView; // 티맵 뷰
     private DrawerLayoutClass drawerLayoutClass; // 제 코드에서 사용하고 있지 않음
     private EditText EditText_Search; // 제 맵 검색
@@ -79,8 +77,12 @@ public class MainActivity extends AppCompatActivity {
 
      */
 
+
+    //  6 이
     private int pictureIndex = 0; // 해당 리사이클러뷰가 갖고 있어야할 마커의 드러블
 
+
+    //
     final int[] picture = {R.drawable.o0, R.drawable.o1, R.drawable.o2,
             R.drawable.o3, R.drawable.o4, R.drawable.o5, R.drawable.o6,
             R.drawable.o7, R.drawable.o8, R.drawable.o9}; // 마커 drawble
@@ -117,15 +119,14 @@ public class MainActivity extends AppCompatActivity {
                             destinationsClass.add(dstData);
 
                             TMapMarkerItem marker = new TMapMarkerItem();
-                            marker.setCanShowCallout(true);
-                            marker.setAutoCalloutVisible(true);
+                            marker.setCanShowCallout(true); // 클릭되는 부분
+//                            marker.setAutoCalloutVisible(true);
                             TMapPoint tMapPoint1 = new TMapPoint(x, y);
                             marker.setIcon(bitmap[pictureIndex]);
                             marker.setTMapPoint(tMapPoint1);
-                            marker.setCalloutTitle("나 클릭했엉?");
+//                            marker.setCalloutTitle("나 클릭했엉?");
 
-
-                            tMapView.addMarkerItem(item.getPOIAddress(), marker);
+                            tMapView.addMarkerItem(Integer.toString(pictureIndex), marker);
                             pictureIndex++;
                         }
                     });
@@ -249,6 +250,11 @@ public class MainActivity extends AppCompatActivity {
         // drawerLayoutClass = new DrawerLayoutClass(); // Drawer
         // drawerLayoutClass.init(this); // Drawer 초기화
 
+        // 검색을 해서 comfirm 버튼 클릭햇을 때 확인
+        // 마커랑 리사이클러뷰에 출력되잖아.
+
+        // 중요한 맵 은 가만히 있어
+        //
 
 
         naverlocation = new naverLocationSearch(); //찾아지는거 확인
@@ -455,18 +461,18 @@ public class MainActivity extends AppCompatActivity {
         linearLayoutTmap = (LinearLayout) findViewById(R.id.linearLayoutTmap);
         tMapView = new TMapView(this);
 
-        tMapView.setOnClickListenerCallBack(new TMapView.OnClickListenerCallback() {
+        tMapView.setOnClickListenerCallBack(new TMapView.OnClickListenerCallback() { // tmapView 클릭하면 발생하는 이벤트를 잡아준다
             @Override
             public boolean onPressEvent(ArrayList<TMapMarkerItem> arrayList, ArrayList<TMapPOIItem> arrayList1, TMapPoint tMapPoint, PointF pointF) {
                 // 클릭했을 때
-                Toast.makeText(getApplicationContext(), "클릭했당!!", Toast.LENGTH_LONG).show();
-                new Handler().postDelayed(new Runnable() {
-                    @Override
-                    public void run() {
-                        recyclerView.scrollToPosition(mAdapter.getItemCount()-1);
-                    }
-                }, 200);
-                System.out.println("여기들어왔니? 시발아 ? ㅎㅎ ");
+                System.out.println(arrayList.size());
+
+                for(int i=0;i<arrayList.size();i++) { // arrayList 안에 클릭된 마커가 들어온다.
+                    int position = Integer.parseInt(arrayList.get(i).getID());
+                    destinationsClass.toPosition(position);
+                    // 리사이클러뷰랑 예랑 일치시켜야되는거아님?
+                    // 마커 눌럿는데 어떤 리사이클러뷰?  // 어떻게 해야될까? 형 어떻게 해야할까요?
+                }
                 return true;
             }
 
@@ -475,6 +481,7 @@ public class MainActivity extends AppCompatActivity {
                 return true;
             }
         });
+
     }
 
     private void EditTextTouch() { // 텍스트 누르면 맵이 안보임

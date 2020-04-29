@@ -9,12 +9,15 @@ import android.widget.TextView;
 
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.skt.Tmap.TMapView;
+
 import java.util.ArrayList;
 import java.util.List;
 
 public class DestinationAdapter extends RecyclerView.Adapter<DestinationAdapter.MyViewHolder>{
     private List<DestinationDataClass> data;
   //  private static View.OnClickListener clickListener; 목록 클릭시 이벤트 상황 처리
+    //private TMapView.OnClickListenerCallback tmapListenner;
 
     public static class MyViewHolder extends RecyclerView.ViewHolder {
         // each data item is just a string in this case
@@ -28,11 +31,12 @@ public class DestinationAdapter extends RecyclerView.Adapter<DestinationAdapter.
             TextView_List_Address = v.findViewById(R.id.TextView_List_Address);
             ImageView_Marker = v.findViewById(R.id.ImageView_Marker);
             ImageView_Picture = v.findViewById(R.id.ImageView_Picture);
+
+
             //TextView_What = v.findViewById(R.id.TextView_What);
-           // v.setClickable(true);
+            //v.setClickable(true);
             //v.setEnabled(true);
-           // v.setOnClickListener(clickListener);  목록 클릭시 이벤트 상황 처리
-           // rootView = v;
+            //v.setOnClickListener(clickListener);  목록 클릭시 이벤트 상황 처리
         }
     }
 

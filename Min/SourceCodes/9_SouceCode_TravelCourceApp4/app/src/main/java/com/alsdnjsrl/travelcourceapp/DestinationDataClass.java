@@ -9,7 +9,6 @@ public class DestinationDataClass {
     private String phone;
     private String category;
     private String description;
-
     private Bitmap link;
     private double x,y;
     private int drable;
