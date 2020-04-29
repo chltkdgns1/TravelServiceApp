@@ -57,8 +57,8 @@ public class MainActivity extends AppCompatActivity {
     private List<DestinationDataClass> data;   // 사용하고 있지않음
     private List<naverSearchLocationData> locationData; // 미투 업데이트하면 주석처리함
     private naverLocationSearch naverlocation; // 네이버 로케이션 네이버 api 검색하면 핸드러로 받아와요 정보를
-
-
+    private int cnt = 0;
+    private double MarkerLatitude, MarkerLongtitude;
     /*
 
     서버를 연결하려면
@@ -98,6 +98,7 @@ public class MainActivity extends AppCompatActivity {
                 synchronized (this) {
                     tmapdata.findAllPOI(locationNaverData.getAddress(), new TMapData.FindAllPOIListenerCallback() { // tmap 명칭통합검색
                         // 네이버 검색으로 가져온 주소
+
                         @Override
                         public void onFindAllPOI(ArrayList poiItem) {
                             TMapPOIItem item = (TMapPOIItem) poiItem.get(0); // 구글로 바꾸고
@@ -117,17 +118,27 @@ public class MainActivity extends AppCompatActivity {
                             dstData.setRoadAddress(locationNaverData.getRoadAddress());
                             dstData.setLink(locationNaverData.getLink());
                             destinationsClass.add(dstData);
-
                             TMapMarkerItem marker = new TMapMarkerItem();
+//                            System.out.println("X좌표");
+//                            System.out.println(x);
+//                            System.out.println("Y좌표");
+//                            System.out.println(y);
                             marker.setCanShowCallout(true); // 클릭되는 부분
-//                            marker.setAutoCalloutVisible(true);
+//                          marker.setAutoCalloutVisible(true);
                             TMapPoint tMapPoint1 = new TMapPoint(x, y);
                             marker.setIcon(bitmap[pictureIndex]);
                             marker.setTMapPoint(tMapPoint1);
-//                            marker.setCalloutTitle("나 클릭했엉?");
+//                          marker.setCalloutTitle("나 클릭했엉?");
+
 
                             tMapView.addMarkerItem(Integer.toString(pictureIndex), marker);
                             pictureIndex++;
+                            MarkerLatitude = dstData.getX();
+                            MarkerLongtitude = dstData.getY();
+                            if(cnt == 1) {
+                                tMapView.setCenterPoint(MarkerLongtitude, MarkerLatitude, true);
+                                cnt++;
+                            }
                         }
                     });
                 }
@@ -240,7 +251,6 @@ public class MainActivity extends AppCompatActivity {
 
 
         init();
-
         tMapView.setSKTMapApiKey(key);
         linearLayoutTmap.addView(tMapView);
     }
@@ -280,15 +290,21 @@ public class MainActivity extends AppCompatActivity {
         ImageView_Confirm.setOnClickListener(new View.OnClickListener() { // 우리가 검색할 주소 확인 버튼 클릭시 발생하는 클릭 이벤트
             @Override
             public void onClick(View v) {
+                cnt = 1;
                 String txt = EditText_Search.getText().toString();
                 if(Rounded_Layout.getVisibility() != View.VISIBLE) Rounded_Layout.setVisibility(View.VISIBLE);
                 if(CardView_Bottom.getVisibility() != View.VISIBLE) CardView_Bottom.setVisibility(View.VISIBLE);
                 check_edit = false;
                 if (txt.isEmpty()) return;
-
+                tMapView.setZoomLevel(14);
                 destinationsClass.clear(); // 현재까지 제공됬던 리사이클러뷰의 모든 리스트 삭제하는 것
                 pictureIndex = 0;
                 naverlocation.getLocationData(handlerPushMessage, txt); // 네이버로 검색
+
+                System.out.println("Longtitude");
+                System.out.println(MarkerLongtitude);
+                System.out.println("Latitude");
+                System.out.println(MarkerLatitude);
 
                 // 네이버 api 키를 발급 받아야함
 
@@ -464,14 +480,14 @@ public class MainActivity extends AppCompatActivity {
         tMapView.setOnClickListenerCallBack(new TMapView.OnClickListenerCallback() { // tmapView 클릭하면 발생하는 이벤트를 잡아준다
             @Override
             public boolean onPressEvent(ArrayList<TMapMarkerItem> arrayList, ArrayList<TMapPOIItem> arrayList1, TMapPoint tMapPoint, PointF pointF) {
-                // 클릭했을 때
+                // 지도를 클릭했을 때
                 System.out.println(arrayList.size());
 
                 for(int i=0;i<arrayList.size();i++) { // arrayList 안에 클릭된 마커가 들어온다.
                     int position = Integer.parseInt(arrayList.get(i).getID());
                     destinationsClass.toPosition(position);
                     // 리사이클러뷰랑 예랑 일치시켜야되는거아님?
-                    // 마커 눌럿는데 어떤 리사이클러뷰?  // 어떻게 해야될까? 형 어떻게 해야할까요?
+                    // 마커 눌럿는데 어떤 리사이클러뷰? 어떻게 해야될까? 형 어떻게 해야할까요?
                 }
                 return true;
             }

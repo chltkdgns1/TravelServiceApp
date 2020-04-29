@@ -115,7 +115,8 @@ public class naverLocationSearch {
             BufferedReader br;
             if (responseCode == 200) { // 정상 호출
                 br = new BufferedReader(new InputStreamReader(con.getInputStream()));
-            } else {  // 에러 발생
+            }
+            else {  // 에러 발생
                 br = new BufferedReader(new InputStreamReader(con.getErrorStream()));
             }
             StringBuilder searchResult = new StringBuilder();
