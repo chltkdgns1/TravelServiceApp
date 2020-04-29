@@ -39,6 +39,7 @@ public class MainActivity extends AppCompatActivity {
     private String key = "l7xx78ce6244fbb34c96b88e96ad54e4074e";
     // key 자기 key 바꿔주면 되요 tmap api 키
 
+    private RecyclerView.Adapter mAdapter;
     private RecyclerView recyclerView;
     private TMapView tMapView; // 티맵 뷰
     private DrawerLayoutClass drawerLayoutClass; // 제 코드에서 사용하고 있지 않음
@@ -458,6 +459,13 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public boolean onPressEvent(ArrayList<TMapMarkerItem> arrayList, ArrayList<TMapPOIItem> arrayList1, TMapPoint tMapPoint, PointF pointF) {
                 // 클릭했을 때
+                Toast.makeText(getApplicationContext(), "클릭했당!!", Toast.LENGTH_LONG).show();
+                new Handler().postDelayed(new Runnable() {
+                    @Override
+                    public void run() {
+                        recyclerView.scrollToPosition(mAdapter.getItemCount()-1);
+                    }
+                }, 200);
                 System.out.println("여기들어왔니? 시발아 ? ㅎㅎ ");
                 return true;
             }
