@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.PointF;
@@ -14,6 +15,13 @@ import android.location.Address;
 import android.location.Geocoder;
 import android.os.Bundle;
 
+import com.google.android.gms.auth.api.signin.GoogleSignIn;
+import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
+import com.google.android.gms.auth.api.signin.GoogleSignInClient;
+import com.google.android.gms.auth.api.signin.GoogleSignInOptions;
+import com.google.android.gms.common.api.ApiException;
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.snackbar.Snackbar;
 
@@ -35,6 +43,16 @@ import androidx.navigation.ui.AppBarConfiguration;
 import androidx.navigation.ui.NavigationUI;
 
 import com.google.android.material.navigation.NavigationView;
+import com.google.firebase.auth.AuthCredential;
+import com.google.firebase.auth.AuthResult;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.auth.GoogleAuthProvider;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 import com.skt.Tmap.TMapData;
 import com.skt.Tmap.TMapMarkerItem;
 import com.skt.Tmap.TMapPOIItem;
@@ -90,6 +108,13 @@ public class MainActivity extends AppCompatActivity {
     AppCompatDialog progressDialog = null;
 
 
+    // firebase 데이터베이스
+
+    private DatabaseReference myRef;
+    private FirebaseDatabase database;
+
+
+
     /*
 
     서버를 연결하려면
@@ -105,7 +130,6 @@ public class MainActivity extends AppCompatActivity {
 
     핸들러를 사용 ( 핸들러는 서브 스레드와 메인스레드의 소통을 위해서 필요)
      */
-
 
     final int[] picture = {R.drawable.o0, R.drawable.o1, R.drawable.o2,
             R.drawable.o3, R.drawable.o4, R.drawable.o5, R.drawable.o6,
@@ -176,12 +200,26 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
+        setContentView(R.layout.login_layout);
+
+
+
+        /*
+        database = FirebaseDatabase.getInstance();
+        myRef = database.getReference("users");
+
+        myRef.child("최상훈").setValue("천재");
+
+            파이어베이스 데이터베이스 되는거 확인 천재 잘 들어감 ㅎㅎ
+        */
+
 
         init();
 
         tMapView.setSKTMapApiKey(key);
         linearLayoutTmap.addView(tMapView);
+
+
     }
 
     void init() {
@@ -297,9 +335,7 @@ public class MainActivity extends AppCompatActivity {
                         }
                     }
                 },500);
-
                 tMapView.setZoomLevel(10);
-
             }
         });
 
