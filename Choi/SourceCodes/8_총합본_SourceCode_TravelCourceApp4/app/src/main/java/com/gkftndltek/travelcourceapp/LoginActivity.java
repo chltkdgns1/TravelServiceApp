@@ -22,14 +22,7 @@ import com.google.firebase.auth.AuthCredential;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
-import com.google.firebase.auth.GetTokenResult;
 import com.google.firebase.auth.GoogleAuthProvider;
-import com.skt.Tmap.TMapData;
-import com.skt.Tmap.TMapMarkerItem;
-import com.skt.Tmap.TMapPOIItem;
-import com.skt.Tmap.TMapPoint;
-
-import java.util.ArrayList;
 
 public class LoginActivity extends AppCompatActivity {
 
@@ -47,7 +40,6 @@ public class LoginActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
         setContentView(R.layout.login_layout);
         mAuth = FirebaseAuth.getInstance();
 
@@ -115,12 +107,15 @@ public class LoginActivity extends AppCompatActivity {
 
          */
 
+
         gso = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
                 .requestIdToken(getString(R.string.default_web_client_id))
                 .requestEmail()
                 .build();
 
         goolgleStart();
+
+
     }
 
     private void goolgleStart() {
@@ -167,16 +162,13 @@ public class LoginActivity extends AppCompatActivity {
 
     private void firebaseAuthWithGoogle(GoogleSignInAccount acct) {
         // Log.d(TAG, "firebaseAuthWithGoogle:" + acct.getId());
-        System.out.println("여기 들어왓니?");
         AuthCredential credential = GoogleAuthProvider.getCredential(acct.getIdToken(), null);
-
-        System.out.println("왜 여기 안오지?");
         mAuth.signInWithCredential(credential)
                 .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
                     @Override
                     public void onComplete(@NonNull Task<AuthResult> task) {
                         if (task.isSuccessful()) {
-                            System.out.println("로그인된거야?");
+
                         } else {
 
                         }

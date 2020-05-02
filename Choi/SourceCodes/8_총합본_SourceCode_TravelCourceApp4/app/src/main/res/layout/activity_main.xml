@@ -136,10 +136,10 @@
                         android:layout_weight="0">
 
                         <androidx.recyclerview.widget.RecyclerView
-                            android:id="@+id/RecyclerView_Destination_List"
-                            android:scrollbars="vertical"
-                            android:layout_width="match_parent"
-                            android:layout_height="match_parent" />
+                        android:id="@+id/RecyclerView_Destination_List"
+                        android:scrollbars="vertical"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent" />
 
                     </LinearLayout>
 
