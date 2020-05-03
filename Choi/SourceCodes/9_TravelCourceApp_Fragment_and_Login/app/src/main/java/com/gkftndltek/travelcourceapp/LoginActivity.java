@@ -7,15 +7,22 @@ import android.os.Handler;
 import android.os.Message;
 import android.view.View;
 import android.widget.Button;
+import android.widget.LinearLayout;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.google.android.gms.auth.api.Auth;
 import com.google.android.gms.auth.api.signin.GoogleSignIn;
 import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
 import com.google.android.gms.auth.api.signin.GoogleSignInClient;
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions;
+import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.api.ApiException;
+import com.google.android.gms.common.api.GoogleApiClient;
+import com.google.android.gms.common.api.ResultCallback;
+import com.google.android.gms.common.api.Status;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthCredential;
@@ -26,8 +33,6 @@ import com.google.firebase.auth.GoogleAuthProvider;
 
 public class LoginActivity extends AppCompatActivity {
 
-    // firebase auth
-
     private GoogleSignInClient mGoogleSignInClient;
     private static final int RC_SIGN_IN = 9001;
     private GoogleSignInOptions gso;
@@ -37,90 +42,84 @@ public class LoginActivity extends AppCompatActivity {
     private String tokens;
     private Context con;
 
+    private LinearLayout LinearLayout_Google_Button,LinearLayout_Logout;
+    private GoogleApiClient mGoogleApiClient;
+
+    // 데이터베이스에 뭘 넣어야되지?
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.login_layout);
         mAuth = FirebaseAuth.getInstance();
 
-        /*
-        if (user != null) {
-            user.delete()
-                    .addOnCompleteListener(new OnCompleteListener<Void>() {
-                        @Override
-                        public void onComplete(@NonNull Task<Void> task) {
-                            if (task.isSuccessful()) {
-                                System.out.println("나이스삭제");
-                            }
-                        }
-                    });
-            // User is signed in
-        } else {
-            System.out.println("여기들어옴?");
-            // No user is signed in
-        }
+        LinearLayout_Google_Button = findViewById(R.id.LinearLayout_Google_Button);
+        LinearLayout_Google_Button.setClickable(true);
 
-         */
+        LinearLayout_Logout = findViewById(R.id.LinearLayout_Logout);
+        LinearLayout_Logout.setClickable(true);
 
-        /*
-        Button_Logout = findViewById(R.id.Button_Logout);
-        Button_Logout.setOnClickListener(new View.OnClickListener() {
+        LinearLayout_Logout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                user = FirebaseAuth.getInstance().getCurrentUser();
-
-                if (user != null) {
-
-                    System.out.println("안들어와 여ㅑ기 삭제하러?");
-
-                    user.getIdToken(false).addOnCompleteListener(new OnCompleteListener<GetTokenResult>() {
-                        @Override
-                        public void onComplete(@NonNull Task<GetTokenResult> task) {
-                            if (task.isSuccessful()) {
-                                tokens = task.getResult().getToken();
-                                AuthCredential credential = GoogleAuthProvider.getCredential(tokens, null);
-
-                                if (credential != null) {
-                                    user.reauthenticate(credential).addOnCompleteListener(new OnCompleteListener<Void>() {
-                                        @Override
-                                        public void onComplete(@NonNull Task<Void> task) {
-
-                                            final String Uid = user.getUid();
-
-                                            user.delete().addOnCompleteListener(new OnCompleteListener<Void>() {
-
-                                                @Override
-                                                public void onComplete(@NonNull Task<Void> task) {
-                                                    System.out.println("삭제됫어?");
-                                                }
-                                            });
-                                        }
-                                    });
-                                }
-                            }
-                        }
-                    });
-                }
+                signOut();
+                // 귀중한 코드
             }
         });
-
-
-         */
-
 
         gso = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
                 .requestIdToken(getString(R.string.default_web_client_id))
                 .requestEmail()
                 .build();
 
+        mGoogleApiClient = new GoogleApiClient.Builder(this)
+                .enableAutoManage(this, new GoogleApiClient.OnConnectionFailedListener() {
+                    @Override
+                    public void onConnectionFailed(@NonNull ConnectionResult connectionResult) {
+
+                    }
+                })
+                .addApi(Auth.GOOGLE_SIGN_IN_API, gso)
+                .build();
+
         goolgleStart();
+    }
+
+    public void signOut() {
+
+        mGoogleApiClient.connect();
+        mGoogleApiClient.registerConnectionCallbacks(new GoogleApiClient.ConnectionCallbacks() {
+
+            @Override
+            public void onConnected(@Nullable Bundle bundle) {
+
+                mAuth.signOut();
+                if (mGoogleApiClient.isConnected()) {
+
+                    Auth.GoogleSignInApi.signOut(mGoogleApiClient).setResultCallback(new ResultCallback<Status>() {
+                        @Override
+                        public void onResult(@NonNull Status status) {
+                            if (status.isSuccess()) {
 
 
+                            } else {
+
+
+                            }
+                        }
+                    });
+                }
+            }
+
+            @Override
+            public void onConnectionSuspended(int i) {
+                finish();
+            }
+        });
     }
 
     private void goolgleStart() {
         mGoogleSignInClient = GoogleSignIn.getClient(this, gso);
-        findViewById(R.id.signInButton).setOnClickListener(new View.OnClickListener() {
+        findViewById(R.id.LinearLayout_Google_Button).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 signIn();
@@ -168,9 +167,12 @@ public class LoginActivity extends AppCompatActivity {
                     @Override
                     public void onComplete(@NonNull Task<AuthResult> task) {
                         if (task.isSuccessful()) {
-
+                            System.out.println("로그인됬니?");
+                            // 로그인이 된 경우
+                            // Intent 를 사용함
+                            // MainActivity
                         } else {
-
+                        // 실패한 경우
                         }
                     }
                 });

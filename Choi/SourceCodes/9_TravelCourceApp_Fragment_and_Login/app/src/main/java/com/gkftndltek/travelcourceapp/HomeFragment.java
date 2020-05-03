@@ -69,13 +69,10 @@ public class HomeFragment extends Fragment implements MainActivity.OnBackPressed
     private InputMethodManager imm;
     private GestureDetector gestureDetector;
     private Boolean outCheck = false;
+
     private Context con ;
     private View rootView;
     AppCompatDialog progressDialog = null;
-
-
-
-
 
     final int[] picture = {R.drawable.o0, R.drawable.o1, R.drawable.o2,
             R.drawable.o3, R.drawable.o4, R.drawable.o5, R.drawable.o6,
@@ -109,7 +106,7 @@ public class HomeFragment extends Fragment implements MainActivity.OnBackPressed
                             dstData.setDescription(locationNaverData.getDescription());
                             dstData.setRoadAddress(locationNaverData.getRoadAddress());
                             dstData.setLink(locationNaverData.getLink());
-                            destinationsClass.add(dstData);
+                            destinationsClass.add(dstData); // 리사이클러뷰
 
                             TMapMarkerItem marker = new TMapMarkerItem();
                             TMapPoint tMapPoint1 = new TMapPoint(x, y);
@@ -123,7 +120,7 @@ public class HomeFragment extends Fragment implements MainActivity.OnBackPressed
                                 tMapView.setCenterPoint(dstData.getY(),dstData.getX());
                             }
 
-                            if(locationNaverData.getEndPoint() == true){
+                            if(locationNaverData.getEndPoint() == true){ // 네이버에서 찾은 검색 결과의 마지막번째 인지 확인
                                 outCheck = true;
                             }
                         }
@@ -146,6 +143,8 @@ public class HomeFragment extends Fragment implements MainActivity.OnBackPressed
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         rootView = inflater.inflate(R.layout.home_fragment_layout, container, false);
+        // 리니어레이아웃
+
         init();
 
         tMapView.setSKTMapApiKey(key);
@@ -159,7 +158,11 @@ public class HomeFragment extends Fragment implements MainActivity.OnBackPressed
         // drawerLayoutClass = new DrawerLayoutClass(); // Drawer
         // drawerLayoutClass.init(this); // Drawer 초기화
 
-        con = getActivity();
+        // 프레그먼트도 액티비티로 존재한다.
+
+
+        con = getActivity(); // 현재 프레그먼트에 액티비티를 가져오는 것이다. context 액티비티의 전유물이고
+        // context 를 반환한다.
 
         gestureDetector = new GestureDetector(con, new GestureDetector.OnGestureListener() {
             @Override
@@ -228,6 +231,7 @@ public class HomeFragment extends Fragment implements MainActivity.OnBackPressed
         LinearLayout_Destination = rootView.findViewById(R.id.LinearLayout_Destination);
         LinearLayout_Destination.setVisibility(View.GONE);
         LinearLayout_Bottom = rootView.findViewById(R.id.LinearLayout_Bottom);
+        // 그냥썻잖아요. 프레그먼트 내부에서 쓸 때는 inflator 로 받은 rootView 를 이용해서 사용한다.
 
 
         tmapdata = new TMapData();
@@ -394,13 +398,18 @@ public class HomeFragment extends Fragment implements MainActivity.OnBackPressed
 
     @Override
     public void onBack() {
-
         final MainActivity activity = (MainActivity)getActivity();
+
+        // 메인액티비티에 접근
         // 한번 뒤로가기 버튼을 눌렀다면 Listener 를 null 로 해제해줍니다.
         //mBackListener = (MainActivity.OnBackPressedListener)((MainActivity) getActivity()).mBackListener;
 
         //if( mBackListener == null) System.out.println("날아오면서 null 됫네 슈벌;");
+
         DrawerLayout drawer = ((MainActivity)getActivity()).drawerLayout;
+
+        // 프레그먼트는 감싸고 있는 액티비티의 UI 의 변경 시킬 수 있다.
+
         if (drawer.isDrawerOpen(Gravity.LEFT)) {
             drawer.closeDrawer(Gravity.LEFT);
             check_edit = false;
@@ -446,10 +455,12 @@ public class HomeFragment extends Fragment implements MainActivity.OnBackPressed
         }
     }
 
+    // 프레그먼트가 실행이 되면 실행이 같이되
+
     @Override
     public void onAttach(Context context) {
         super.onAttach(context);
-        ((MainActivity)context).setOnBackPressedListener(this);
+        ((MainActivity)context).setOnBackPressedListener(this); // 프레그먼트
     }
 
     // Fragment 호출 시 반드시 호출되는 오버라이드 메소드입니다.
@@ -468,11 +479,9 @@ public class HomeFragment extends Fragment implements MainActivity.OnBackPressed
     }
 
     public void progressON(String message) {
-
         if (progressDialog != null && progressDialog.isShowing()) {
             progressSET(message);
         } else {
-
             progressDialog = new AppCompatDialog(con);
             progressDialog.setCancelable(false);
             progressDialog.getWindow().setBackgroundDrawable(new ColorDrawable(android.graphics.Color.TRANSPARENT));
@@ -495,8 +504,6 @@ public class HomeFragment extends Fragment implements MainActivity.OnBackPressed
         if (!TextUtils.isEmpty(message)) {
             tv_progress_message.setText(message);
         }
-
-
     }
 
     public void progressSET(String message) {
