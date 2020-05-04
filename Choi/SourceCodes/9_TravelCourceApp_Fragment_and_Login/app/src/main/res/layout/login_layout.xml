@@ -242,7 +242,6 @@
             android:id="@+id/LinearLayout_Logout"
             >
 
-            <!--
             <TextView
                 android:gravity="center"
                 android:layout_width="0dp"
@@ -251,7 +250,7 @@
                 android:textStyle="bold"
                 android:text="로그아웃"
                 style="?android:textAppearanceSmall"
-                android:textColor="#fff"/> -->
+                android:textColor="#fff"/>
 
         </LinearLayout>
     </LinearLayout>

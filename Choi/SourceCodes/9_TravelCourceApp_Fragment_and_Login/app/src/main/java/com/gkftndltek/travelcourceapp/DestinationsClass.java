@@ -34,13 +34,15 @@ public class DestinationsClass {
             @Override
             public boolean onTouch(View v, MotionEvent motionEvent) {
                 if(v.getTag() != null){
-                    int position = (int)v.getTag();
-                    DestinationDataClass dat = ((DestinationAdapter) mAdapter).getData(position);
-                    Message msg = Message.obtain();
-                    msg.obj = dat;
-                    msg.what = 2;
-                    handlerPushMessage.sendMessage(msg);
-                    gestureDetector.onTouchEvent(motionEvent);
+                    synchronized (this) {
+                        int position = (int) v.getTag();
+                        DestinationDataClass dat = ((DestinationAdapter) mAdapter).getData(position);
+                        Message msg = Message.obtain();
+                        msg.obj = dat;
+                        msg.what = 2;
+                        handlerPushMessage.sendMessage(msg);
+                        gestureDetector.onTouchEvent(motionEvent);
+                    }
                 }
                 return true;
             }

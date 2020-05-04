@@ -1,13 +1,17 @@
 package com.gkftndltek.travelcourceapp;
 
+import android.app.AlertDialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
 import android.view.View;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.LinearLayout;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -30,6 +34,17 @@ import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.auth.GoogleAuthProvider;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
+import com.skt.Tmap.TMapData;
+import com.skt.Tmap.TMapMarkerItem;
+import com.skt.Tmap.TMapPOIItem;
+import com.skt.Tmap.TMapPoint;
+
+import java.util.ArrayList;
 
 public class LoginActivity extends AppCompatActivity {
 
@@ -37,20 +52,52 @@ public class LoginActivity extends AppCompatActivity {
     private static final int RC_SIGN_IN = 9001;
     private GoogleSignInOptions gso;
     private FirebaseAuth mAuth;
-    private FirebaseUser user;
-    private Button Button_Logout;
-    private String tokens;
-    private Context con;
 
     private LinearLayout LinearLayout_Google_Button,LinearLayout_Logout;
     private GoogleApiClient mGoogleApiClient;
 
-    // 데이터베이스에 뭘 넣어야되지?
+    // 파이어베이스
+
+    private FirebaseDatabase database;
+    private DatabaseReference users,logined;
+
+    // Alert
+    private AlertDialog.Builder alt_bld;
+    private EditText et;
+    private AlertDialog alert;
+    private String nickName="";
+    private boolean okCheck = false;
+
+    public Handler handlerPushMessage = new Handler() {
+        @Override
+        public void handleMessage(Message msg) {
+            if (msg.what == 1) { // 네이버 검색했다
+                /*
+                UserData data = (UserData) msg.obj;
+                Intent intent = new Intent(LoginActivity.this, MainActivity.class);
+                intent.putExtra("data", data);
+                startActivity(intent);
+
+                 */
+            }
+        }
+    };
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.login_layout);
+
+        init();
+    }
+
+    public void init(){
+        getAlert();
         mAuth = FirebaseAuth.getInstance();
+
+        database = FirebaseDatabase.getInstance();
+
+        users = database.getReference("users");
+        logined = database.getReference("logined");
 
         LinearLayout_Google_Button = findViewById(R.id.LinearLayout_Google_Button);
         LinearLayout_Google_Button.setClickable(true);
@@ -83,7 +130,7 @@ public class LoginActivity extends AppCompatActivity {
 
         goolgleStart();
     }
-
+    //
     public void signOut() {
 
         mGoogleApiClient.connect();
@@ -100,9 +147,7 @@ public class LoginActivity extends AppCompatActivity {
                         public void onResult(@NonNull Status status) {
                             if (status.isSuccess()) {
 
-
                             } else {
-
 
                             }
                         }
@@ -159,7 +204,7 @@ public class LoginActivity extends AppCompatActivity {
         }
     }
 
-    private void firebaseAuthWithGoogle(GoogleSignInAccount acct) {
+    private void firebaseAuthWithGoogle(final GoogleSignInAccount acct) {
         // Log.d(TAG, "firebaseAuthWithGoogle:" + acct.getId());
         AuthCredential credential = GoogleAuthProvider.getCredential(acct.getIdToken(), null);
         mAuth.signInWithCredential(credential)
@@ -167,7 +212,57 @@ public class LoginActivity extends AppCompatActivity {
                     @Override
                     public void onComplete(@NonNull Task<AuthResult> task) {
                         if (task.isSuccessful()) {
-                            System.out.println("로그인됬니?");
+                            final String token = acct.getId().toString();
+                            users.child(token).addListenerForSingleValueEvent(new ValueEventListener() {
+                                @Override
+                                public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                                    UserData data = dataSnapshot.getValue(UserData.class);
+                                    if(data != null){
+                                        logined.child(token).setValue(1);
+                                        Intent intent = new Intent(LoginActivity.this, MainActivity.class);
+                                        intent.putExtra("token", token);
+                                        startActivity(intent);
+                                    }
+                                    else{
+                                        System.out.println("오케이체크 값 : " + okCheck);
+                                        alert.show();
+
+                                        final Handler handler = new Handler();
+                                        handler.postDelayed(new Runnable() {
+                                            @Override
+                                            public void run() {
+                                                System.out.println("너 실행되긴함?");
+                                                if (okCheck == false) {
+                                                    handler.postDelayed(this,100);
+                                                }
+                                                else{
+                                                    okCheck = false;
+                                                    if(nickName.isEmpty()){
+                                                        Toast.makeText(getApplicationContext(),"닉네임을 입력하지 않았습니다. 다시 로그인해주세요.",Toast.LENGTH_LONG).show();
+                                                        return;
+                                                    }
+
+                                                    UserData datas = new UserData();
+                                                    datas.setNickName(nickName); nickName = "";
+                                                    users.child(token).setValue(datas);
+                                                    users.child(token).child("xy").setValue("-1");
+                                                    logined.child(token).setValue(1);
+                                                    Intent intent = new Intent(LoginActivity.this, MainActivity.class);
+                                                    intent.putExtra("token",token);
+                                                    startActivity(intent);
+                                                    return;
+                                                }
+                                            }
+                                        },100);
+                                    }
+                                }
+
+                                @Override
+                                public void onCancelled(@NonNull DatabaseError databaseError) {
+
+                                }
+                            });
+
                             // 로그인이 된 경우
                             // Intent 를 사용함
                             // MainActivity
@@ -176,6 +271,23 @@ public class LoginActivity extends AppCompatActivity {
                         }
                     }
                 });
+    }
+
+    void getAlert(){
+        et = new EditText(this);
+        alt_bld = new AlertDialog.Builder(this);
+        alt_bld.setTitle("내 닉네임")
+                .setMessage("사용할 닉네임을 정해주세요")
+                .setCancelable(false)
+                .setView(et)
+                .setPositiveButton("확인", new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int id) {
+                        nickName = et.getText().toString();
+                        okCheck = true;
+                    }
+                });
+
+        alert = alt_bld.create();
     }
 }
 

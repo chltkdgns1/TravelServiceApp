@@ -31,6 +31,8 @@ import androidx.cardview.widget.CardView;
 import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.fragment.app.Fragment;
 
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
 import com.skt.Tmap.TMapData;
 import com.skt.Tmap.TMapMarkerItem;
 import com.skt.Tmap.TMapPOIItem;
@@ -57,7 +59,6 @@ public class HomeFragment extends Fragment implements MainActivity.OnBackPressed
     private LinearLayout linearLayoutTmap, LinearLayout_Bottom, LinearLayout_Destination; // 티맵 , 바텀 카드 뷰 감싸고 있는 레이아웃 ( 아닐수잇음..)
     private Boolean check_edit = false; // 검색창을 눌렀는지 안눌렀는지
     private TMapData tmapdata; // 티맵 데이터
-    private Bitmap[] bitmap; // 마커들
     private RoundedLayout Rounded_Layout; // 레이아웃의 형태를 바꿔줘요
     private LinearLayout.LayoutParams Rounded_Layout_param, CardView_Bottom_param, LinearLayout_Bottom_param, LinearLayout_Destination_param;
     // 레이아웃의 속성바꿀 수 있음
@@ -74,9 +75,22 @@ public class HomeFragment extends Fragment implements MainActivity.OnBackPressed
     private View rootView;
     AppCompatDialog progressDialog = null;
 
-    final int[] picture = {R.drawable.o0, R.drawable.o1, R.drawable.o2,
-            R.drawable.o3, R.drawable.o4, R.drawable.o5, R.drawable.o6,
-            R.drawable.o7, R.drawable.o8, R.drawable.o9}; // 마커 drawble
+    // 핸들러
+
+    private DestinationDataClass destData = null;
+
+    // 메인 액티비티
+
+
+
+    // 데이터 베이스
+
+    private NoneBitmapDestData noneBitmapDestData = null; // 비트맵 때문에 firebase에 안올라감 ..
+    private FirebaseDatabase database;
+    private DatabaseReference users,logined;
+
+
+    // 마커 drawble
 
     //private Geocoder geocoder ; 지오코더
 
@@ -85,6 +99,7 @@ public class HomeFragment extends Fragment implements MainActivity.OnBackPressed
         public void handleMessage(Message msg) {
             if (msg.what == 1) { // 네이버 검색했다
                 final naverSearchLocationData locationNaverData = (naverSearchLocationData) msg.obj;
+
                 synchronized (this) {
                     tmapdata.findAllPOI(locationNaverData.getAddress(), new TMapData.FindAllPOIListenerCallback() { // tmap 명칭통합검색
                         // 네이버 검색으로 가져온 주소
@@ -96,7 +111,7 @@ public class HomeFragment extends Fragment implements MainActivity.OnBackPressed
                             double x = Double.parseDouble(xyData[1]), y = Float.parseFloat(xyData[3]); // 위도 경도
 
                             DestinationDataClass dstData = new DestinationDataClass();
-                            dstData.setDrable(picture[locationNaverData.getIndex()]);
+                            dstData.setDrable(((MainActivity)getActivity()).picture[locationNaverData.getIndex()]);
                             dstData.setX(x);
                             dstData.setY(y);
                             dstData.setPhone(locationNaverData.getTel());
@@ -106,11 +121,13 @@ public class HomeFragment extends Fragment implements MainActivity.OnBackPressed
                             dstData.setDescription(locationNaverData.getDescription());
                             dstData.setRoadAddress(locationNaverData.getRoadAddress());
                             dstData.setLink(locationNaverData.getLink());
+                            dstData.setIndex(locationNaverData.getIndex());
+                            dstData.setUrl(locationNaverData.getUrl());
                             destinationsClass.add(dstData); // 리사이클러뷰
 
                             TMapMarkerItem marker = new TMapMarkerItem();
                             TMapPoint tMapPoint1 = new TMapPoint(x, y);
-                            marker.setIcon(bitmap[locationNaverData.getIndex()]);
+                            marker.setIcon(((MainActivity)getActivity()).bitmap[locationNaverData.getIndex()]);
                             marker.setTMapPoint(tMapPoint1);
 
                             tMapView.addMarkerItem(Integer.toString(locationNaverData.getIndex()), marker);
@@ -128,14 +145,29 @@ public class HomeFragment extends Fragment implements MainActivity.OnBackPressed
                 }
             }
             else if (msg.what == 2) {
-                DestinationDataClass destData = (DestinationDataClass) msg.obj;
-                tMapView.setCenterPoint(destData.getY(), destData.getX(), true);
+                synchronized (this) {
+                    DestinationDataClass data = (DestinationDataClass) msg.obj;
+                    noneBitmapDestData = new NoneBitmapDestData();
+                    noneBitmapDestData.setIndex(data.getIndex());
+                    noneBitmapDestData.setX(data.getX());
+                    noneBitmapDestData.setPhone(data.getPhone());
+                    noneBitmapDestData.setRoadAddress(data.getRoadAddress());
+                    noneBitmapDestData.setAddress(data.getAddress());
+                    noneBitmapDestData.setCategory(data.getCategory());
+                    noneBitmapDestData.setDescription(data.getDescription());
+                    noneBitmapDestData.setDrable(data.getDrable());
+                    noneBitmapDestData.setName(data.getName());
+                    noneBitmapDestData.setUrl(data.getUrl());
+                    noneBitmapDestData.setY(data.getY());
+                    tMapView.setCenterPoint(data.getY(), data.getX(), true);
+                }
 
             } else if (msg.what == 3) {
-                TMapMarkerItem item = (TMapMarkerItem) msg.obj;
-                tMapView.setCenterPoint(item.longitude, item.latitude, true);
+                synchronized (this) {
+                    TMapMarkerItem item = (TMapMarkerItem) msg.obj;
+                    tMapView.setCenterPoint(item.longitude, item.latitude, true);
+                }
             }
-
         }
     };
 
@@ -159,6 +191,10 @@ public class HomeFragment extends Fragment implements MainActivity.OnBackPressed
         // drawerLayoutClass.init(this); // Drawer 초기화
 
         // 프레그먼트도 액티비티로 존재한다.
+        database = FirebaseDatabase.getInstance();
+
+        users = database.getReference("users");
+        logined = database.getReference("logined");
 
 
         con = getActivity(); // 현재 프레그먼트에 액티비티를 가져오는 것이다. context 액티비티의 전유물이고
@@ -200,6 +236,12 @@ public class HomeFragment extends Fragment implements MainActivity.OnBackPressed
                 alert_ex.setPositiveButton("확인", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
+                        // 버그 발생할 수 있음.
+                        if(noneBitmapDestData != null) {
+                            String token = ((MainActivity)getActivity()).token;
+                            users.child(token).child("xy").push().setValue(noneBitmapDestData );
+                            noneBitmapDestData  = null;
+                        }
                         System.out.println("확인눌렸냐?");
                     }
                 });
@@ -220,10 +262,7 @@ public class HomeFragment extends Fragment implements MainActivity.OnBackPressed
 
         naverlocation = new naverLocationSearch(); //찾아지는거 확인
 
-        bitmap = new Bitmap[10];
-        for (int i = 0; i < picture.length; i++) {
-            bitmap[i] = BitmapFactory.decodeResource(getResources(), picture[i]);
-        }
+
 
         destinationsClass = new DestinationsClass();
         destinationsClass.execute(rootView, con.getApplicationContext(),handlerPushMessage,gestureDetector);
@@ -398,7 +437,6 @@ public class HomeFragment extends Fragment implements MainActivity.OnBackPressed
 
     @Override
     public void onBack() {
-        final MainActivity activity = (MainActivity)getActivity();
 
         // 메인액티비티에 접근
         // 한번 뒤로가기 버튼을 눌렀다면 Listener 를 null 로 해제해줍니다.
@@ -406,7 +444,8 @@ public class HomeFragment extends Fragment implements MainActivity.OnBackPressed
 
         //if( mBackListener == null) System.out.println("날아오면서 null 됫네 슈벌;");
 
-        DrawerLayout drawer = ((MainActivity)getActivity()).drawerLayout;
+        final MainActivity activity = (MainActivity)getActivity();
+        DrawerLayout drawer = activity.drawerLayout;
 
         // 프레그먼트는 감싸고 있는 액티비티의 UI 의 변경 시킬 수 있다.
 

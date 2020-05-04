@@ -35,6 +35,8 @@ dependencies {
 
     implementation 'com.google.android.gms:play-services-auth:17.0.0'
     implementation 'com.google.firebase:firebase-auth:19.1.0'
+
+    implementation 'com.google.firebase:firebase-storage:19.1.1'
     // 로그인을 사용할 수 있음
 
     implementation 'com.google.android.material:material:1.1.0'

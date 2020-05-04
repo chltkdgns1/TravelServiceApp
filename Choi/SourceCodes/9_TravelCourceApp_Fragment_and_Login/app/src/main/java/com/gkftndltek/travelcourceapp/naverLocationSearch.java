@@ -92,8 +92,9 @@ public class naverLocationSearch {
                             naverData.setTel(locationObj.getString("telephone"));
                             naverData.setAddress(locationObj.getString("address"));
                             naverData.setRoadAddress(locationObj.getString("roadAddress"));
-                            naverData.setLink(getLocationImage(title)); // getLocationImage(title)
+                            naverData.setLink(getImageBitmap(getLocationImage(title))); // getLocationImage(title)
                             naverData.setIndex(i);
+                            naverData.setUrl(getLocationImage(title));
                             naverData.setEndPoint((i == minNumber ? true : false));
                             // 핸들러로 보내주는거에요
 
@@ -110,7 +111,7 @@ public class naverLocationSearch {
         }.start();
     }
 
-    public Bitmap getLocationImage(final String searchObject) { // 검색어 = searchObject로
+    public String getLocationImage(final String searchObject) { // 검색어 = searchObject로
         try {
             String text = URLEncoder.encode(searchObject, "UTF-8");
             String apiURL = "https://openapi.naver.com/v1/search/image?query=" + text;
@@ -145,7 +146,7 @@ public class naverLocationSearch {
                 JSONArray objArr = jobj.getJSONArray("items");
 
                 JSONObject locationObj = objArr.getJSONObject(0);
-                return getImageBitmap(locationObj.getString("link"));
+                return locationObj.getString("link");
             }
         } catch (Exception e) {
 

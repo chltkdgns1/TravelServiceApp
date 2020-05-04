@@ -2,7 +2,7 @@ package com.gkftndltek.travelcourceapp;
 
 import android.graphics.Bitmap;
 
-public class DestinationDataClass {
+public class NoneBitmapDestData {
     private String name; // title
     private String address;
     private String roadAddress;
@@ -10,7 +10,6 @@ public class DestinationDataClass {
     private String category;
     private String description;
     private String url;
-    private Bitmap link;
     private double x,y;
     private int drable;
     private int index;
@@ -32,12 +31,6 @@ public class DestinationDataClass {
     }
     public void setCategory(String category) {
         this.category = category;
-    }
-    public Bitmap getLink() {
-        return link;
-    }
-    public void setLink(Bitmap link) {
-        this.link = link;
     }
     public String getDescription() {
         return description;
