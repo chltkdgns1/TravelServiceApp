@@ -18,6 +18,9 @@ import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 
+import com.gkftndltek.travelcourceapp.Fragment_Home.HomeFragment;
+import com.gkftndltek.travelcourceapp.Fragment_PersonalMap.PersonalMapFragment;
+import com.gkftndltek.travelcourceapp.Login.LoginActivity;
 import com.google.android.material.navigation.NavigationView;
 
 public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
@@ -83,6 +86,13 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         }
         else if(id == R.id.nav_home){
             getSupportFragmentManager().beginTransaction().replace(R.id.main_frame,homeFragment).commit();
+        }
+
+        else if(id == R.id.nav_logout){
+            Intent intent = new Intent(MainActivity.this, LoginActivity.class);
+            intent.putExtra("logout", true);
+            startActivity(intent);
+            finish();
         }
         drawerLayout.closeDrawer(GravityCompat.START);
         return true;
