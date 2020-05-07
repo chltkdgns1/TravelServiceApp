@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "151400254241",
+    "firebase_url": "https://sentilab-e54f8.firebaseio.com",
+    "project_id": "sentilab-e54f8",
+    "storage_bucket": "sentilab-e54f8.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:151400254241:android:12eebcbb18de41ac888c60",
+        "android_client_info": {
+          "package_name": "com.alsdnjsrl.login10"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "151400254241-iapjud956vi0usqnrco0fessiqt40ufg.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBOveluqhn6j7dUuzvNhEzOsV54JE61kvs"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "151400254241-iapjud956vi0usqnrco0fessiqt40ufg.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

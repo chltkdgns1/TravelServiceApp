@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/RelativeLayout_main"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    >
+    <!--
+    1. 얼굴사진 보여주기
+    2. 얼굴위에 멍든사진 보여주기
+    3. 볼에 고양이 수염 붙이기
+    -->
+    <ImageView
+        android:id="@+id/ImageView_main"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@null"
+        android:scaleType="fitCenter"
+        android:adjustViewBounds="true"
+        android:layout_centerInParent="true"
+        android:src="@drawable/minmin"
+        />
+
+</RelativeLayout>
