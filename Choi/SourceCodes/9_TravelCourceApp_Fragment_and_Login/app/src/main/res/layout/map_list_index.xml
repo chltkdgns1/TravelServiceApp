@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="170dp">
+
+    <TextView
+        android:id="@+id/TextView_Map_Name"
+        android:layout_width="match_parent"
+        android:layout_height="70dp"
+        android:gravity="center"
+        android:textStyle="bold"
+        android:text="맵이름"
+        android:textSize="20dp"
+        />
+
+    <TextView
+        android:id="@+id/TextView_Map_coment"
+        android:layout_width="match_parent"
+        android:layout_height="70dp"
+        android:gravity="center"
+        android:text="맵 설명"
+        android:textStyle="bold"
+        android:textSize="20dp"
+            />
+
+</LinearLayout>

@@ -25,9 +25,11 @@
             </intent-filter>
         </activity>
 
-        <activity android:name=".MainActivity"
+        <activity android:name=".MakeMapActivity.MakeMapAct"
             android:theme="@style/AppTheme.NoActionBar">
         </activity>
-
+        <activity android:name=".CustMap.MainActivity"
+            android:theme="@style/AppTheme.NoActionBar">
+        </activity>
     </application>
 </manifest>

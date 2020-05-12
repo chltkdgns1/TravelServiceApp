@@ -15,7 +15,7 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
-import com.gkftndltek.travelcourceapp.MainActivity;
+import com.gkftndltek.travelcourceapp.MakeMapActivity.MakeMapAct;
 import com.gkftndltek.travelcourceapp.R;
 import com.google.android.gms.auth.api.Auth;
 import com.google.android.gms.auth.api.signin.GoogleSignIn;
@@ -226,14 +226,14 @@ public class LoginActivity extends AppCompatActivity {
                     @Override
                     public void onComplete(@NonNull Task<AuthResult> task) {
                         if (task.isSuccessful()) {
-                            final String token = acct.getId().toString();
+                            final String token = acct.getEmail().replace("@", " ").replace("."," ");
                             users.child(token).addListenerForSingleValueEvent(new ValueEventListener() {
                                 @Override
                                 public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                                     UserData data = dataSnapshot.getValue(UserData.class);
                                     if (data != null) {
                                         logined.child(token).setValue(1);
-                                        Intent intent = new Intent(LoginActivity.this, MainActivity.class);
+                                        Intent intent = new Intent(LoginActivity.this, MakeMapAct.class);
                                         intent.putExtra("token", token);
                                         startActivity(intent);
                                         finish();
@@ -258,9 +258,9 @@ public class LoginActivity extends AppCompatActivity {
                                                     UserData datas = new UserData();
                                                     datas.setNickName(nickName);
                                                     nickName = "";
-                                                    users.child(token).setValue(datas);
+                                                    users.child(token).child("userdata").setValue(datas);
                                                     logined.child(token).setValue(1);
-                                                    Intent intent = new Intent(LoginActivity.this, MainActivity.class);
+                                                    Intent intent = new Intent(LoginActivity.this, MakeMapAct.class);
                                                     intent.putExtra("token", token);
                                                     startActivity(intent);
                                                     finish();

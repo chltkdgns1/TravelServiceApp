@@ -30,54 +30,16 @@
                     android:id="@+id/ImageView_Menu2"
                     android:src="@drawable/menu"/>
 
-                <TextView
-                    android:layout_width="0dp"
-                    android:layout_height="match_parent"
-                    android:layout_weight="0.85"
-                    android:textSize="15sp"
-                    android:textStyle="bold"
-                    android:textColor="@color/Gray"
-                    android:gravity="center"
-                    android:text="오른쪽 버튼 클릭시 경로를 생성합니다."
-                    />
-
-                <ImageView
-                    android:layout_width="0dp"
-                    android:layout_height="match_parent"
-                    android:layout_weight="0.05"
-                    android:id="@+id/ImageView_Confirm2"
-                    android:src="@drawable/confirmlittle"/>
-
             </LinearLayout>
 
         </androidx.cardview.widget.CardView>
 
-        <com.gkftndltek.travelcourceapp.RoundedLayout
-            android:id="@+id/Rounded_Layout2"
-            android:layout_height="0dp"
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/RecyclerView_Basket"
+            android:layout_weight="0.94"
+            android:scrollbars="vertical"
             android:layout_width="match_parent"
-            android:layout_weight="0.6"
-            android:layout_margin="3dp">
-
-            <android.widget.LinearLayout
-                xmlns:android="http://schemas.android.com/apk/res/android"
-                xmlns:tools="http://schemas.android.com/tools"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:orientation="vertical"
-                tools:context="com.skt.tmapsample.tmapview.MapDraw">
-
-                <LinearLayout
-                    android:id="@+id/linearLayoutTmap2"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:orientation="vertical">
-                </LinearLayout>
-
-            </android.widget.LinearLayout>
-
-        </com.gkftndltek.travelcourceapp.RoundedLayout>
-
+            android:layout_height="0dp" />
     </LinearLayout>
 
 </LinearLayout>
