@@ -1,0 +1,85 @@
+{
+  "project_info": {
+    "project_number": "339175142416",
+    "firebase_url": "https://travelcourseapp-9bbda.firebaseio.com",
+    "project_id": "travelcourseapp-9bbda",
+    "storage_bucket": "travelcourseapp-9bbda.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:339175142416:android:e474205055835d16c68695",
+        "android_client_info": {
+          "package_name": "com.chu.TravelCourseApp"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "339175142416-ljlgijb7oaccbfq8tfgshvkvd9ntdo3f.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.chu.TravelCourseApp",
+            "certificate_hash": "66c75f9a57ec27b7252b5c5e72d02b41550b9715"
+          }
+        },
+        {
+          "client_id": "339175142416-oe4ibokpm1sctbvoe1mve0gh7dugrspc.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDDPMIw4FJumxYxW-Br9PzB1SH3kp36eEk"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "339175142416-oe4ibokpm1sctbvoe1mve0gh7dugrspc.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:339175142416:android:47c469d6df715318c68695",
+        "android_client_info": {
+          "package_name": "com.example.sns"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "339175142416-tn3j9ln8skmq81gdcpdlkva6d75o388g.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.sns",
+            "certificate_hash": "66c75f9a57ec27b7252b5c5e72d02b41550b9715"
+          }
+        },
+        {
+          "client_id": "339175142416-oe4ibokpm1sctbvoe1mve0gh7dugrspc.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDDPMIw4FJumxYxW-Br9PzB1SH3kp36eEk"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "339175142416-oe4ibokpm1sctbvoe1mve0gh7dugrspc.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
