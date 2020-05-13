@@ -9,7 +9,7 @@ import android.widget.ImageView;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-import com.gkftndltek.travelcourceapp.MakeMapActivity.FragmentMakeMaps.MakeMapsFragment;
+import com.gkftndltek.travelcourceapp.MakeMapActivity.FntMakeMaps.MakeMapsFragment;
 import com.gkftndltek.travelcourceapp.MakeMapActivity.FragmentMaps.MapFragment;
 import com.gkftndltek.travelcourceapp.R;
 

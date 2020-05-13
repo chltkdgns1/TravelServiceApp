@@ -1,8 +1,6 @@
 package com.gkftndltek.travelcourceapp.MakeMapActivity.firstRecyclerView;
 
 
-import com.gkftndltek.travelcourceapp.CustMap.Fragment_PersonalMap.NoneBitmapDestData;
-
 public class MakeMapData  {
     private String mapName;
     private String tag;

@@ -12,15 +12,17 @@ import android.view.MenuItem;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
-import androidx.fragment.app.FragmentManager;
-import androidx.fragment.app.FragmentTransaction;
 
 import com.gkftndltek.travelcourceapp.CustMap.Fragment_Home.HomeFragment;
-import com.gkftndltek.travelcourceapp.CustMap.Fragment_MyDataList.FragmentMyMapDataList;
-import com.gkftndltek.travelcourceapp.CustMap.Fragment_PersonalMap.PersonalMapFragment;
+import com.gkftndltek.travelcourceapp.CustMap.FntMyDataList.FragmentMyMapDataList;
+import com.gkftndltek.travelcourceapp.CustMap.FntPersonalMap.PersonalMapFragment;
+import com.gkftndltek.travelcourceapp.CustMap.RecyclerView.DestinationDataClass;
 import com.gkftndltek.travelcourceapp.Login.LoginActivity;
 import com.gkftndltek.travelcourceapp.R;
 import com.google.android.material.navigation.NavigationView;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
 
@@ -35,6 +37,9 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     // 마커
 
     public Bitmap[] bitmap; // 마커들
+
+    public List<DestinationDataClass> DestSum;
+
 
     public final int[] picture = {R.drawable.o0, R.drawable.o1, R.drawable.o2,
             R.drawable.o3, R.drawable.o4, R.drawable.o5, R.drawable.o6,
@@ -54,7 +59,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     }
 
     void init(){
-
+        DestSum = new ArrayList<>();
         bitmap = new Bitmap[10];
         for (int i = 0; i < picture.length; i++) {
             bitmap[i] = BitmapFactory.decodeResource(getResources(), picture[i]);

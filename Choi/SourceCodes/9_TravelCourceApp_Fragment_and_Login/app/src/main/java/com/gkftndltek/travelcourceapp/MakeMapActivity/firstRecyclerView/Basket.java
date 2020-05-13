@@ -1,6 +1,6 @@
 package com.gkftndltek.travelcourceapp.MakeMapActivity.firstRecyclerView;
 
-import com.gkftndltek.travelcourceapp.CustMap.Fragment_PersonalMap.NoneBitmapDestData;
+import com.gkftndltek.travelcourceapp.CustMap.FntPersonalMap.NoneBitmapDestData;
 
 public class Basket{
     NoneBitmapDestData data;
