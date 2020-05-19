@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "899796075736",
+    "firebase_url": "https://photofirebasestorage.firebaseio.com",
+    "project_id": "photofirebasestorage",
+    "storage_bucket": "photofirebasestorage.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:899796075736:android:c143f2fc28d642ca9c43ad",
+        "android_client_info": {
+          "package_name": "com.alsdnjsrl.photofirebasestorage"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "899796075736-r38udra1ipummq7ie0o7fkt0itfo7rjf.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.alsdnjsrl.photofirebasestorage",
+            "certificate_hash": "bd8c73eb52d9189b569d173b6a278da3b2c2c748"
+          }
+        },
+        {
+          "client_id": "899796075736-1tu8ela5chkv0vr1tdklnp29pi6g972a.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyB2oIcfqVgcs3wXLMGrmhWfNCb4qghVKx4"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "899796075736-1tu8ela5chkv0vr1tdklnp29pi6g972a.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
