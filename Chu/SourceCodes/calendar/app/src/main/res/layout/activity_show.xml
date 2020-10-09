@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android" android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        >
+        <LinearLayout
+            android:layout_weight="0.7"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            >
+
+            <TextView
+                android:layout_marginTop="10dp"
+                android:id="@+id/Show_Person_List_Address"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="주소 : "
+                android:textSize="14sp"
+                android:maxLines="1"
+                android:ellipsize="end"
+                android:textStyle="bold"
+                android:layout_marginLeft="10dp"/>
+
+            <TextView
+                android:layout_marginTop="10dp"
+                android:id="@+id/Show_PersonList_Category"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textSize="12sp"
+                android:text="카테고리 : "
+                android:maxLines="1"
+                android:ellipsize="end"
+                android:layout_marginLeft="15dp"/>
+
+            <ImageView
+                android:layout_width="100dp"
+                android:layout_height="100dp"
+                android:id="@+id/show_PersonList_url"
+                />
+
+        </LinearLayout>
+
+
+
+        <Button
+            android:id="@+id/change_button"
+            android:layout_width="100dp"
+            android:layout_height="45dp"
+            android:gravity="center"
+            android:text="수정하기"
+            android:layout_gravity="right"/>
+        <View
+            android:layout_width="0dp"
+            android:layout_height="0dp" />
+
+
+        <EditText
+            android:id="@+id/et_schedulename"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:gravity="center"
+            />
+
+
+
+        <EditText
+            android:id="@+id/et_schedulecontent"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="8"
+            android:gravity="center"/>
+
+
+    </LinearLayout>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

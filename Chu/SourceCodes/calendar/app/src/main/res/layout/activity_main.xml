@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/Home"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <CalendarView
+        android:id="@+id/calendar"
+
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginTop="80dp"
+    android:layout_marginBottom="20dp"
+    android:focusedMonthDateColor="#EC5656"
+
+    android:maxDate="12/31/2023"
+    android:minDate="01/01/2020"
+    android:selectedWeekBackgroundColor="#ffff00"
+    android:showWeekNumber="false"
+    android:unfocusedMonthDateColor="#0000ff"
+    android:weekSeparatorLineColor="#00ff00" />
+
+</RelativeLayout>
