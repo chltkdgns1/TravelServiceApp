@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:showIn="navigation_view">
+
+    <group android:checkableBehavior="single">
+        <item
+            android:id="@+id/nav_home"
+            android:icon="@drawable/ic_menu_camera"
+            android:title="지도 검색" />
+        <item
+            android:id="@+id/nav_person_map"
+            android:icon="@drawable/ic_menu_gallery"
+            android:title="장바구니" />
+        <item
+            android:id="@+id/nav_nearbyplace"
+            android:icon="@drawable/ic_menu_slideshow"
+            android:title="주변 여행지 검색" />
+        <item
+            android:id="@+id/My_Map_Data_List"
+            android:icon="@drawable/ic_menu_manage"
+            android:title="내 여행 리스트 보기" />
+
+        <item
+            android:id="@+id/My_Travel_Manage"
+            android:icon="@drawable/ic_menu_manage"
+            android:title="내 여행 계획" />
+    </group>
+</menu>

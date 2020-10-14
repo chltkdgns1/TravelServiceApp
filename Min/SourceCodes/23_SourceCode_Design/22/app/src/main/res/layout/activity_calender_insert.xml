@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:weightSum="1"
+    android:orientation="vertical">
+
+    <EditText
+        android:id="@+id/EditText_Calender_Name"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="0.1"
+        android:gravity="center"
+        android:hint="스케쥴 제목을 입력해주세요" />
+
+    <EditText
+        android:id="@+id/EditText_Calender_Category"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="0.08"
+        android:gravity="center"
+        android:hint="카테고리를 설정해주세요" />
+
+    <EditText
+        android:id="@+id/EditText_Calender_Adress"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="0.15"
+        android:gravity="center"
+        android:hint="주소 설정" />
+
+    <ImageView
+        android:id="@+id/ImageView_Calender_Image"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="0.2"
+        android:gravity="center"
+        android:hint="스케쥴 내용을 입력해주세요" />
+
+    <EditText
+        android:id="@+id/EditText_Calender_Content"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="0.37"
+        android:gravity="center"
+        android:hint="컨텐츠를 입력해주세요" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="0.1"
+        android:orientation="horizontal"
+        android:weightSum="1">
+
+        <Button
+            android:id="@+id/Button_Calender_Insert"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="0.5"
+            android:background="@drawable/filled_border"
+            android:layout_margin="15dp"
+            android:text="입력버튼" />
+
+        <Button
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="0.5"
+            android:id="@+id/Button_Calender_Search"
+            android:background="@drawable/filled_border"
+            android:layout_margin="15dp"
+            android:text="검색"/>
+
+    </LinearLayout>
+</LinearLayout>
