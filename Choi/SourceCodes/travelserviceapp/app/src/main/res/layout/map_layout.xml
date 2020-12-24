@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="horizontal" android:layout_width="match_parent"
+    android:weightSum="1"
+    android:layout_height="match_parent">
+
+
+    <LinearLayout
+        android:layout_width="1dp"
+        android:layout_height="match_parent"
+        android:background="#747474"
+        />
+
+    <LinearLayout
+        android:layout_width="0dp"
+        android:layout_height="match_parent"
+        android:layout_weight="0.85"
+        android:background="@drawable/button_background_black"
+        >
+
+        <FrameLayout
+            android:id="@+id/fragment_make_map"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="0dp"
+        android:layout_height="match_parent"
+        android:layout_weight="0.15"
+        android:orientation="vertical"
+        >
+
+        <ImageView
+            android:background="?attr/selectableItemBackground"
+            android:padding="10dp"
+            android:id="@+id/ImageView_Home"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="50dp"
+            android:src="@drawable/home" />
+
+        <ImageView
+            android:background="?attr/selectableItemBackground"
+            android:padding="10dp"
+            android:id="@+id/ImageView_Withdrawal"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="100dp"
+            android:src="@drawable/person"
+            android:visibility="gone" />
+
+
+        <ImageView
+            android:background="?attr/selectableItemBackground"
+            android:padding="10dp"
+            android:id="@+id/ImageView_MakeMap"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="100dp"
+            android:src="@drawable/map" />
+
+        <TextView
+            android:background="?attr/selectableItemBackground"
+            android:padding="11dp"
+            android:id="@+id/TextView_Sns"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="100dp"
+            android:gravity="center"
+            android:text=""
+            android:textSize="20dp"
+            android:textStyle="bold" />
+
+    </LinearLayout>
+
+</LinearLayout>

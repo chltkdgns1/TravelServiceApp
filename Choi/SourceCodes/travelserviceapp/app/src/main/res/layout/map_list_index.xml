@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    >
+
+    <androidx.cardview.widget.CardView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="10dp"
+        android:elevation = "104dp"
+        android:background="@drawable/button_background_black">
+
+        <RelativeLayout
+            android:background="?attr/selectableItemBackground"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <ImageView
+                android:id="@+id/ImageView_Map"
+                android:layout_width="match_parent"
+                android:layout_height="150dp"
+                android:layout_gravity="center"
+                android:gravity="center"
+                android:src="@drawable/map_image3" />
+
+            <TextView
+                android:id="@+id/TextView_Map_Name"
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:gravity="center"
+                android:textStyle="bold"
+                android:text="맵이름"
+                android:textColor="#3F51B5"
+                android:textSize="15sp"
+                android:layout_below="@+id/ImageView_Map"
+                />
+
+            <TextView
+                android:id="@+id/TextView_Map_coment"
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:gravity="center"
+                android:text="맵설명"
+                android:textColor="#3F51B5"
+                android:textStyle="bold"
+                android:textSize="15sp"
+                android:layout_below="@+id/TextView_Map_Name"
+                />
+
+        </RelativeLayout>
+    </androidx.cardview.widget.CardView>
+</RelativeLayout>

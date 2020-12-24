@@ -1,0 +1,168 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:weightSum="1"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="0.06"
+        android:weightSum="1"
+        android:orientation="horizontal">
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:scaleType="fitXY"
+            android:text="여행 좋아해?"
+            android:gravity="center"
+            android:textStyle="italic"
+            android:textSize="25sp"
+            android:textColor="@color/DarkBlue"
+            android:layout_weight="0.4"
+            android:id="@+id/TextView_Real_Home_Admin_Writing"
+            />
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="0.25"
+            android:gravity="center"
+            android:text="여행 관리"
+            android:textStyle="bold"
+            android:id="@+id/TextView_Real_Home_Cource_Mangement"
+            />
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="0.15"
+            android:gravity="center"
+            android:text="SNS"
+            android:textStyle="bold"
+            android:id="@+id/TextView_Real_Home_SNS"
+            />
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="0.2"
+            android:gravity="center"
+            android:text="로그아웃"
+            android:textStyle="bold"
+            android:id="@+id/TextView_Real_Home_MyData"
+            />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:orientation="horizontal"
+        android:background="@drawable/button_black"
+        android:layout_height="0dp"
+        android:weightSum="0.9"
+        android:layout_weight="0.05">
+
+        <TextView
+            android:layout_width="0dp"
+            android:id="@+id/TextView_Real_Home_Update"
+            android:layout_weight="0.3"
+            android:layout_height="match_parent"
+            android:gravity="center"
+            android:textStyle="bold"
+            android:text="업데이트"
+            />
+
+        <TextView
+            android:id="@+id/TextView_Real_Home_Notice"
+            android:layout_width="0dp"
+            android:layout_weight="0.3"
+            android:layout_height="match_parent"
+            android:gravity="center"
+            android:textStyle="bold"
+            android:text="공지사항"
+            />
+
+        <TextView
+            android:id="@+id/TextView_Real_Home_Event"
+            android:layout_width="0dp"
+            android:layout_weight="0.3"
+            android:layout_height="match_parent"
+            android:gravity="center"
+            android:textStyle="bold"
+            android:text="이벤트"
+            />
+    </LinearLayout>
+
+    <FrameLayout
+        android:id="@+id/Fragment_Home_Recycler"
+        android:layout_marginTop="3dp"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="0.89"/>
+
+<!--    <androidx.recyclerview.widget.RecyclerView-->
+<!--        android:layout_marginTop="3dp"-->
+<!--        android:id="@+id/RecyclerView_Real_Home"-->
+<!--        android:background="@drawable/button_black"-->
+<!--        android:layout_width="match_parent"-->
+<!--        android:layout_height="0dp"-->
+<!--        android:layout_weight="0.89"-->
+<!--        android:scrollbarFadeDuration="0"-->
+<!--        android:scrollbarSize="5dp"-->
+<!--        android:scrollbarThumbVertical="@android:color/darker_gray"-->
+<!--        android:scrollbars="vertical" />-->
+
+
+
+    <!--
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:weightSum="0.9"
+        android:layout_weight="0.06"
+        android:orientation="horizontal">
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:gravity="center"
+            android:text="내 정보"
+            android:textStyle="bold"
+            android:layout_weight="0.3"/>
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:gravity="center"
+            android:text="회원관리"
+            android:textStyle="bold"
+            android:layout_weight="0.3"/>
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:gravity="center"
+            android:text="회원관리"
+            android:textStyle="bold"
+            android:layout_weight="0.3"/>
+
+    </LinearLayout> -->
+
+    <!--
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/RecyclerView_Real_Home_Data"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="0.85"
+        android:scrollbarFadeDuration="0"
+        android:scrollbarSize="5dp"
+        android:scrollbarThumbVertical="@android:color/darker_gray"
+        android:scrollbars="vertical" /> -->
+
+
+</LinearLayout>
